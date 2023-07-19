@@ -24,7 +24,11 @@ module.exports = {
     postGoal: (req, res) => {
         let newGoal = req.body.goal
 
-        res.status(200).send({newGoal});
+        if (newGoal == "") {
+            res.status(400).send("You forgot to input a goal!")
+        } else {
+            res.status(200).send({newGoal});
+        }
     }
 
 }

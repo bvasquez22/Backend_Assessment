@@ -3,6 +3,7 @@ const fortuneBtn = document.getElementById("fortuneButton")
 const goalForm = document.getElementById("goalForm")
 let goalData = document.getElementById("goal")
 const goalList = document.querySelector('ul')
+const deleteBtn = document.createElement('button')
 
 const getCompliment = () => {
     axios.get("http://localhost:4000/api/compliment")
@@ -34,6 +35,7 @@ const postGoal = (e) => {
         })
         .catch((err) => {
             console.log(err)
+            alert(err.response.data)
         });
     goalData.value = ""
 }
