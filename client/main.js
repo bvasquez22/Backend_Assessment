@@ -1,11 +1,8 @@
 const complimentBtn = document.getElementById("complimentButton")
 const fortuneBtn = document.getElementById("fortuneButton")
-const goalBtn = document.getElementById("goalButton")
+const goalForm = document.getElementById("goalForm")
+let goalData = document.getElementById("goal")
 const goalList = document.querySelector('ul')
-
-let goal = {
-    goal: "Buy a car"
-}
 
 const getCompliment = () => {
     axios.get("http://localhost:4000/api/compliment")
@@ -25,7 +22,10 @@ const getFortune = () => {
 
 const postGoal = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:4000/api/goal", {goal: 'Buy a car'})
+    let goal = {
+        goal: goalData.value
+    }
+    axios.post("http://localhost:4000/api/goal", goal)
         .then(res => {
             const newGoal = document.createElement("li");
             newGoal.textContent = res.data.newGoal;
@@ -35,8 +35,9 @@ const postGoal = (e) => {
         .catch((err) => {
             console.log(err)
         });
+    goalData.value = ""
 }
 
 complimentBtn.addEventListener('click', getCompliment)
 fortuneBtn.addEventListener('click', getFortune)
-goalBtn.addEventListener('click', postGoal)
+goalForm.addEventListener('submit', postGoal)
