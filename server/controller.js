@@ -22,7 +22,6 @@ module.exports = {
     },
 
     postGoal: (req, res) => {
-        console.log(req.body)
         let newGoal = req.body.goal
 
         res.status(200).send({newGoal});

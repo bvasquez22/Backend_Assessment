@@ -23,13 +23,14 @@ const getFortune = () => {
         });
 };
 
-const postGoal = () => {
+const postGoal = (e) => {
+    e.preventDefault();
     axios.post("http://localhost:4000/api/goal", {goal: 'Buy a car'})
         .then(res => {
             const newGoal = document.createElement("li");
-            newGoal.textContent = res.data;
+            newGoal.textContent = res.data.newGoal;
             goalList.appendChild(newGoal);
-            alert(`New goal added: ${newGoal}!`)
+            alert(`New goal added: "${res.data.newGoal}"`)
         })
         .catch((err) => {
             console.log(err)
