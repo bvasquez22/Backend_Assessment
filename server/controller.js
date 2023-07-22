@@ -1,3 +1,6 @@
+globalid = 1
+let goals = []
+
 module.exports = {
 
     getCompliment: (req, res) => {
@@ -22,12 +25,27 @@ module.exports = {
     },
 
     postGoal: (req, res) => {
-        let newGoal = req.body.goal
 
-        if (newGoal == "") {
+        if (req.body.goal == "") {
             res.status(400).send("You forgot to input a goal!")
         } else {
-            res.status(200).send({newGoal});
+            let newGoal = {id: globalid, goal: req.body.goal}
+            goals.push(newGoal)
+            globalid++
+            res.status(200).send(goals);
+        }
+    },
+
+    deleteGoal: (req, res) => {
+        console.log(req.params)
+        console.log(goals)
+
+        for (let i = 0; i < goals.length; i++) {
+            if (goals[i].id == req.params.id) {
+                goals.splice(i, 1)
+                console.log(goals)
+                res.status(200).send(goals)
+            }
         }
     }
 
