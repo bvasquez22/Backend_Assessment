@@ -37,13 +37,9 @@ module.exports = {
     },
 
     deleteGoal: (req, res) => {
-        console.log(req.params)
-        console.log(goals)
-
         for (let i = 0; i < goals.length; i++) {
             if (goals[i].id == req.params.id) {
                 goals.splice(i, 1)
-                console.log(goals)
                 res.status(200).send(goals)
             }
         }
